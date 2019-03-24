@@ -1,0 +1,346 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Balance</title>
+<meta name="description" content="这是一个 结算 页面">
+<meta name="keywords" content="user">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+<link rel="stylesheet" href="assets/css/admin.css">
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+
+<script src="assets/js/amazeui.min.js"></script>
+
+<script src="assets/js/app.js"></script>
+<script>
+function  showView(){
+	getInfo();
+}
+function getInfo(){
+	var thisURL=decodeURI(window.location.href);
+	var name =thisURL.split('~')[1];
+	var ID=thisURL.split('~')[2];
+
+	//显示地址相关信息
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		data:{"id":ID},
+		url: "ManagerGetAllFinanceInfoServlet",
+		success : function(result) {
+			console.log(result);
+			//alert("success");
+			var jo = eval(result);
+			var len = jo.length;
+			var approval = document.getElementById("approval");
+
+			var appr="";
+			appr=appr+"<form class='am-form'>"
+			+"<table"
+			+" class='am-table am-table-striped am-table-hover table-main'>"
+			+"<thread>"
+			+"	<tr>"
+			+"		<th class='table-check'><input type='checkbox' /></th>"
+			+"		<th>ID</th>"
+			+"		<th>注册码</th>"
+			+"		<th>用户ID</th>"
+			+"		<th>时间</th>"
+			+"		<th>金额</th>"
+			+"		<th class='table-set'>操作</th>"
+			+"	</tr>"
+			+"</thead>"
+			+"<tbody>";
+
+			if(len!=0){
+				for (var i = 0; i < len; i++) {
+					var apprId=i+1;
+					appr=appr+ "<tr>"
+						+"<td><input type='checkbox' /></td>"
+						+"<td>"+apprId+"</td>"
+						+"<td>"+jo[i].rid+"</td>"
+						+"<td>"+jo[i].mid+"</td>"
+						+"<td>"+jo[i].date+"</td>"
+						+"<td>"+jo[i].account+"</td>"
+						+"<td>"
+						+"	<div class='am-btn-toolbar'>"
+						+"		<div class='am-btn-group am-btn-group-xs'>"
+						+"			<button "
+						+"				class='am-btn am-btn-default am-btn-xs am-hide-sm-only' onclick='permit("+JSON.stringify(jo[i])+")'>"
+						+"				<span></span> 结算"
+						+"			</button>"
+						+"		</div>"
+						+"	</div>"
+						+"</td>"
+						+"</tr>";
+				}
+			}else{
+				appr=appr+"<p>暂时没有需要审批的信息！</p>";
+			}
+			
+			appr=appr+"</tbody>"
+			+"	</table>"
+			+"</form>";
+			approval.innerHTML +=appr;
+		},
+		error : function(result) {
+			console.log(result);
+			alert(result);
+		}
+	});
+  }
+</script>
+
+</head>
+
+<body onload="showView()" style="height: 100%; margin: 0">
+
+
+	<header class="am-topbar am-topbar-inverse admin-header">
+		<div class="am-topbar-brand">
+			<strong>Yummy</strong> <small>经理</small>
+		</div>
+
+		<button
+			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+			data-am-collapse="{target: '#topbar-collapse'}">
+			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
+		</button>
+
+		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+			<ul
+				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+				<li><a href="javascript:;"><span class="am-icon-envelope-o"></span>
+						收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
+				<li class="am-dropdown" data-am-dropdown><a
+					class="am-dropdown-toggle" data-am-dropdown-toggle
+					href="javascript:;"> <span class="am-icon-users"></span> 管理员 <span
+						class="am-icon-caret-down"></span>
+				</a>
+					<ul class="am-dropdown-content">
+						<li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+						<li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+						<li><a href="#"><span class="am-icon-power-off"></span>
+								退出</a></li>
+					</ul></li>
+				<li class="am-hide-sm-only"><a href="javascript:;"
+					id="admin-fullscreen"><span class="am-icon-arrows-alt"></span>
+						<span class="admin-fullText">开启全屏</span></a></li>
+			</ul>
+		</div>
+	</header>
+
+	<div class="am-cf admin-main">
+		<!-- sidebar start -->
+		<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+			<div class="am-offcanvas-bar admin-offcanvas-bar">
+				<ul class="am-list admin-sidebar-list">
+					<li><a onclick="approve()"><span class="am-icon-home"></span>
+							审批中心</a></li>
+					<li class="memberInfo-parent"><a class="am-cf"
+						data-am-collapse="{target: '#collapse-nav'}"><span
+							class="am-icon-file"></span> 统计 <span
+							class="am-icon-angle-right am-fr am-margin-right"></span></a>
+						<ul class="am-list am-collapse admin-sidebar-sub am-in"
+							id="collapse-nav">
+							<li><a onclick="restaurantStatistics()"> 餐厅统计</a></li>
+
+							<li><a onclick="memberStatistics()"> 会员统计</a></li>
+							<li><a onclick="financeStatistics()"> 财务情况</a></li>
+						</ul></li>
+					<li class="order-parent"><a class="am-cf"
+						data-am-collapse="{target: '#collapse-nav'}"><span
+							class="am-icon-file"></span> 结算 <span
+							class="am-icon-angle-right am-fr am-margin-right"></span></a>
+						<ul class="am-list am-collapse admin-sidebar-sub am-in"
+							id="collapse-nav">
+							<li><a onclick="balance()" class="am-cf">结算财务</a></li>
+
+						</ul></li>
+					<li><a href="Login.html"><span class="am-icon-sign-out"></span> 退出</a></li>
+				</ul>
+
+				<div class="am-panel am-panel-default admin-sidebar-panel">
+					<div class="am-panel-bd">
+						<p>
+							<span class="am-icon-bookmark"></span> 公告
+						</p>
+						<p>吃得开心！</p>
+					</div>
+				</div>
+
+				<div class="am-panel am-panel-default admin-sidebar-panel">
+					<div class="am-panel-bd">
+						<p>
+							<span class="am-icon-tag"></span> wiki
+						</p>
+						<p>Welcome to Yummy!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- content start -->
+		<div class="admin-content">
+			<div class="admin-content-body">
+				<div class="am-cf am-padding am-padding-bottom-0">
+					<div class="am-fl am-cf">
+						<strong class="am-text-primary am-text-lg">结算</strong> / <small>Balance
+							info</small>
+					</div>
+				</div>
+
+				<div class="am-g">
+					<div class="am-u-sm-12 am-u-md-6">
+						<div class="am-btn-toolbar">
+							<div class="am-btn-group am-btn-group-xs">
+								<button type="button" class="am-btn am-btn-default"
+									onclick="allPermit()">
+									<span></span> 全部结算
+								</button>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="am-g">
+					<div class="am-u-sm-12 am-u-md-4 am-u-md-push-8"></div>
+					
+					<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+						<ul id="approval">
+
+
+							
+						</ul>
+
+						<div id="container" style="height: 300px"></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="admin-content-footer">
+			<hr>
+			<p class="am-padding-left">祝您吃得开心！</p>
+		</footer>
+
+	</div>
+	<!-- content end -->
+
+
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+	<footer>
+		<hr>
+		<p class="am-padding-left">祝您吃得开心！</p>
+	</footer>
+
+
+	<script type="text/javascript"> 
+	function approve(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("Manager.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function restaurantStatistics(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("RestaurantStatistics.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function memberStatistics(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("MemberStatistics.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function financeStatistics(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("FinanceStatistics.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function balance(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("Balance.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function permit(info){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var jo = eval(info);
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			data:{"financeId":jo.financeId},
+			url: "ManagerPermitBalanceServlet",
+			success : function(result) {
+				console.log(result);
+				var jo1 = eval(result);
+				if (jo.data == "false") {
+					alert("结算失败 ");
+				}else{
+					var url=encodeURI("Balance.html?"+"~"+name+"~"+ID);
+					window.location.href=url;
+				}
+				
+			},
+			error : function(result) {
+				console.log(result);
+				alert(result);
+			}
+		});
+	} 
+	function allPermit(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		//var jo = eval(info);
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			data:{"name":name.value},
+			url: "ManagerAllPermitBalanceServlet",
+			success : function(result) {
+				console.log(result);
+				var jo1 = eval(result);
+				if (jo.data == "false") {
+					alert("全部结算失败 ");
+				}else{
+					var url=encodeURI("Balance.html?"+"~"+name+"~"+ID);
+					window.location.href=url;
+				}
+				
+			},
+			error : function(result) {
+				console.log(result);
+				alert(result);
+			}
+		});
+	}
+	
+
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="entity.Menu" table="menu">
+		<meta attribute="class-description">
+			This class contains the menu detail.
+		</meta>
+		<id name="meid" type="java.lang.Integer" column="meid">
+			<generator class="native"/>
+		</id>
+		<property name="rid" column="rid" type="java.lang.String"/>
+		<property name="name" column="name" type="java.lang.String"/>
+		<property name="remarks" column="remarks" type="java.lang.String"/>
+		<property name="price" column="price" type="java.lang.Double"/>
+		<property name="currentPrice" column="currentPrice" type="java.lang.Double"/>
+		<property name="stock" column="stock" type="java.lang.Integer"/>
+		<property name="type" column="type" type="java.lang.String"/>
+		<property name="startTime" column="startTime" type="java.lang.String"/>
+		<property name="endTime" column="endTime" type="java.lang.String"/>
+	</class>
+</hibernate-mapping>

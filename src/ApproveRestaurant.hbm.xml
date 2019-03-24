@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="entity.ApproveRestaurant" table="approverestaurant">
+		<meta attribute="class-description">
+			This class contains the approverestaurant detail.
+		</meta>
+		<id name="aid" type="java.lang.Integer" column="aid">
+			<generator class="native"/>
+		</id>
+		<property name="id" column="id" type="java.lang.Integer"/>
+		<property name="rid" column="rid" type="java.lang.String"/>
+		<property name="restaurantName" column="restaurantName" type="java.lang.String"/>
+		<property name="restaurantPassword" column="restaurantPassword" type="java.lang.String"/>
+		<property name="address" column="address" type="java.lang.String"/>
+		
+		<property name="type" column="type" type="java.lang.String"/>
+		<property name="keeper" column="keeper" type="java.lang.String"/>
+		<property name="phone" column="phone" type="java.lang.String"/>
+		<property name="registerTime" column="registerTime" type="java.lang.String"/>
+		<property name="identity" column="identity" type="java.lang.String"/>
+		<property name="account" column="account" type="java.lang.Double"/>
+		<property name="state" column="state" type="java.lang.Integer"/>
+	</class>
+</hibernate-mapping>

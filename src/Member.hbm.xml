@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="entity.Member" table="member">
+		<meta attribute="class-description">
+			This class contains the member detail.
+		</meta>
+		<id name="mid" type="java.lang.Integer" column="mid">
+			<generator class="native"/>
+		</id>
+		<property name="memberName" column="memberName" type="java.lang.String"/>
+		<property name="memberPassword" column="memberPassword" type="java.lang.String"/>
+		<property name="mail" column="mail" type="java.lang.String"/>
+		<property name="level" column="level" type="java.lang.Integer"/>
+		<property name="registerTime" column="registerTime" type="java.lang.String"/>
+		<property name="identity" column="identity" type="java.lang.String"/>
+		<property name="state" column="state" type="java.lang.Integer"/>
+		<property name="code" column="code" type="java.lang.String"/>
+		<property name="account" column="account" type="java.lang.Double"/>
+		<property name="consumption" column="consumption" type="java.lang.Double"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,501 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Member</title>
+<meta name="description" content="这是一个 member 页面">
+<meta name="keywords" content="user">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+<link rel="stylesheet" href="assets/css/admin.css">
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+
+<script src="assets/js/amazeui.min.js"></script>
+
+<script src="assets/js/app.js"></script>
+<script>
+function  showView(){
+	getInfo();
+}
+</script>
+
+</head>
+
+<body onload="showView()" style="height: 100%; margin: 0">
+
+
+	<header class="am-topbar am-topbar-inverse admin-header">
+		<div class="am-topbar-brand">
+			<strong>Yummy</strong> <small>会员</small>
+		</div>
+
+		<button
+			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+			data-am-collapse="{target: '#topbar-collapse'}">
+			<span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span>
+		</button>
+
+		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+			<ul
+				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+				<li><a href="javascript:;"><span class="am-icon-envelope-o"></span>
+						收件箱 <span class="am-badge am-badge-warning">5</span></a></li>
+				<li class="am-dropdown" data-am-dropdown><a
+					class="am-dropdown-toggle" data-am-dropdown-toggle
+					href="javascript:;"> <span class="am-icon-users"></span> 管理员 <span
+						class="am-icon-caret-down"></span>
+				</a>
+					<ul class="am-dropdown-content">
+						<li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
+						<li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+						<li><a href="#"><span class="am-icon-power-off"></span>
+								退出</a></li>
+					</ul></li>
+				<li class="am-hide-sm-only"><a href="javascript:;"
+					id="admin-fullscreen"><span class="am-icon-arrows-alt"></span>
+						<span class="admin-fullText">开启全屏</span></a></li>
+			</ul>
+		</div>
+	</header>
+
+	<div class="am-cf admin-main">
+		<!-- sidebar start -->
+		<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+			<div class="am-offcanvas-bar admin-offcanvas-bar">
+				<ul class="am-list admin-sidebar-list">
+					<li><a onclick="bookHall()"><span class="am-icon-home"></span>
+							点餐中心</a></li>
+					<li class="memberInfo-parent"><a class="am-cf"
+						data-am-collapse="{target: '#collapse-nav'}"><span
+							class="am-icon-file"></span> 我的 <span
+							class="am-icon-angle-right am-fr am-margin-right"></span></a>
+						<ul class="am-list am-collapse admin-sidebar-sub am-in"
+							id="collapse-nav">
+							<li><a onclick="member()"> 个人资料</a></li>
+
+							<li><a onclick="manageAddress()"> 管理地址</a></li>
+							<li><a onclick="coupon()"> 优惠券</a></li>
+							<li><a onclick="recharge()"> 充值</a></li>
+						</ul></li>
+					<li class="order-parent"><a class="am-cf"
+						data-am-collapse="{target: '#collapse-nav'}"><span
+							class="am-icon-file"></span> 订单 <span
+							class="am-icon-angle-right am-fr am-margin-right"></span></a>
+						<ul class="am-list am-collapse admin-sidebar-sub am-in"
+							id="collapse-nav">
+							<li><a onclick="currentOrder()" class="am-cf">当前订单</a></li>
+
+							<li><a onclick="historyOrder()"> 历史订单</a></li>
+						</ul></li>
+						<li><a onclick="gotoCart()"><span></span> 购物车</a></li>
+					<li><a onclick="finance()"><span></span> 消费统计</a></li>
+					<li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+				</ul>
+
+				<div class="am-panel am-panel-default admin-sidebar-panel">
+					<div class="am-panel-bd">
+						<p>
+							<span class="am-icon-bookmark"></span> 公告
+						</p>
+						<p>吃得开心！</p>
+					</div>
+				</div>
+
+				<div class="am-panel am-panel-default admin-sidebar-panel">
+					<div class="am-panel-bd">
+						<p>
+							<span class="am-icon-tag"></span> wiki
+						</p>
+						<p>Welcome to Yummy!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- sidebar end -->
+
+		<!-- content start -->
+		<div class="admin-content">
+			<div class="admin-content-body">
+				<div class="am-cf am-padding am-padding-bottom-0">
+					<div class="am-fl am-cf">
+						<strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal
+							information</small>
+					</div>
+				</div>
+
+				<hr />
+
+				<div class="am-g">
+					<div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+						<div class="am-panel am-panel-default">
+							<div class="am-panel-bd">
+								<div class="am-g">
+									<div class="am-u-md-4">
+										<img class="am-img-circle am-img-thumbnail"
+											src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80"
+											alt="" />
+									</div>
+									<div class="am-u-md-8">
+										<p>选择头像</p>
+										<form class="am-form">
+											<div class="am-form-group">
+												<input type="file" id="user-pic">
+												<p class="am-form-help">请选择要上传的文件...</p>
+												<button type="button"
+													class="am-btn am-btn-primary am-btn-xs">保存</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="am-panel am-panel-default">
+							<div class="am-panel-bd">
+								<div class="user-info">
+									<p>等级信息</p>
+									<div class="am-progress am-progress-sm">
+										<div class="am-progress-bar" style="width: 60%"></div>
+									</div>
+									<p class="user-info-order">
+										当前等级：<strong>LV8</strong> 活跃天数：<strong>587</strong> 距离下一级别：<strong>160</strong>
+									</p>
+								</div>
+								<div class="user-info">
+									<p>信用信息</p>
+									<div class="am-progress am-progress-sm">
+										<div class="am-progress-bar am-progress-bar-success"
+											style="width: 80%"></div>
+									</div>
+									<p class="user-info-order">
+										信用等级：正常当前 信用积分：<strong>80</strong>
+									</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+						<form id="form1" onsubmit="return false" action="##" method="post"
+							class="am-form am-form-horizontal">
+							<div class="am-form-group">
+								<label for="user-name" class="am-u-sm-3 am-form-label">ID:</label>
+								<div class="am-u-sm-9">
+									<input type="text" readonly="readonly" id="user-ID"
+										style="border: none">
+								</div>
+							</div>
+							<div class="am-form-group">
+								<label for="user-name" class="am-u-sm-3 am-form-label">姓名:</label>
+								<div class="am-u-sm-9">
+									<input type="text" readonly="readonly" id="user-name"
+										style="border: none">
+								</div>
+							</div>
+
+							<div class="am-form-group">
+								<label class="am-u-sm-3 am-form-label">密码:</label>
+								<div class="am-u-sm-9">
+									<input type="password" id="user-password"
+										style="border: none">
+								</div>
+							</div>
+							
+							<div class="am-form-group">
+								<label class="am-u-sm-3 am-form-label">确认密码:</label>
+								<div class="am-u-sm-9">
+									<input type="password" id="confirm-password"
+										style="border: none">
+								</div>
+							</div>
+
+							<div class="am-form-group">
+								<label class="am-u-sm-3 am-form-label">邮箱：</label>
+								<div class="am-u-sm-9">
+									<input type="text" readonly="readonly" id="email"
+										style="border: none">
+								</div>
+							</div>
+							
+							<div class="am-form-group">
+								<label class="am-u-sm-3 am-form-label">余额：</label>
+								<div class="am-u-sm-9">
+									<input type="text" readonly="readonly" id="account"
+										style="border: none">
+								</div>
+							</div>
+							
+							<input type="button" name="submitButton" value="确认修改" class="am-btn am-btn-primary am-btn-sm am-fl" onclick="sub()">
+						</form>
+						<div id="container" style="height: 300px"></div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="admin-content-footer">
+			<hr>
+			<p class="am-padding-left">祝您吃得开心！</p>
+		</footer>
+
+	</div>
+	<!-- content end -->
+
+	</div>
+
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+	<footer>
+		<hr>
+		<p class="am-padding-left">祝您吃得开心！</p>
+	</footer>
+
+
+	<script type="text/javascript"> 
+	//跳转修改信息界面
+	function sub(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+
+		var memberName = document.getElementById("user-name");
+		var pass = document.getElementById("user-password");
+		var confirmPd=document.getElementById("confirm-password");
+
+		pd=pass.value;
+		conf=confirmPd.value;
+		
+		if(pd!=conf){
+			alert("两次密码输入不一致！ ");
+		}else{
+			
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "MemberModifyPasswordServlet",
+				data : {"mid":ID,"password":pd},
+				success : function(result) {
+					console.log(result);
+					var jo = eval(result);
+					if (jo.data == "false") {
+						alert("修改失败");
+					} else {
+						var url=encodeURI("Member.html?"+"~"+name+"~"+ID);
+						window.location.href=url;
+					}
+					;
+				},
+				error : function() {
+					alert(" 会员异常！");
+				}
+			});
+		}
+		
+		
+		
+	}
+
+	function member(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("Member.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function coupon(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("ManageCoupon.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function recharge(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+
+		//显示余额
+		$.ajax({
+			type: "POST", //传输类型
+			dataType: "json", //数据类型
+			data:{"mid":ID},//工人的id,identity
+			url: "MemberGetAccountServlet", //url
+			success: function(result){
+				var jo =eval(result);
+				var url=encodeURI("Recharge.html?"+"~"+name+"~"+ID+"~"+jo.data);
+				window.location.href=url;
+			}
+		});
+	}
+	function bookHall(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("BookHall.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function currentOrder(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("MemberCurrentOrder.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function historyOrder(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		var url=encodeURI("HistoryOrder.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function gotoCart(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		//var jo = eval(info);
+		var url=encodeURI("Cart.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function finance(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		//var jo = eval(info);
+		var url=encodeURI("MemberFinance.html?"+"~"+name+"~"+ID);
+		window.location.href=url;
+	}
+	function getInfo(){
+		var thisURL=decodeURI(window.location.href);
+		var name =thisURL.split('~')[1];
+		var ID=thisURL.split('~')[2];
+		document.getElementById('user-ID').value=ID;
+		document.getElementById('user-name').value=name;
+
+
+		//显示密码
+		$.ajax({
+			type: "POST", //传输类型
+			dataType: "json", //数据类型
+			data:{"mid":ID},//工人的id,identity
+			url: "MemberGetPasswordServlet", //url
+			success: function(result){
+				var jo =eval(result);
+				document.getElementById('user-password').value=jo.data;
+			}
+		});
+
+		//显示邮箱
+		$.ajax({
+			type: "POST", //传输类型
+			dataType: "json", //数据类型
+			data:{"mid":ID},//工人的id,identity
+			url: "MemberGetEmailServlet", //url
+			success: function(result){
+				var jo =eval(result);
+				document.getElementById('email').value=jo.data;
+			}
+		});
+
+		//显示余额
+		$.ajax({
+			type: "POST", //传输类型
+			dataType: "json", //数据类型
+			data:{"mid":ID},//工人的id,identity
+			url: "MemberGetAccountServlet", //url
+			success: function(result){
+				var jo =eval(result);
+				document.getElementById('account').value=jo.data;
+			}
+		});
+		
+	  }
+	  /*
+	      //显示任务信息
+	       $.ajax({
+				type: "POST", //传输类型
+				dataType: "json", //数据类型
+				data:{"Id":ID,"identity":"worker"},//工人的id,identity
+				url: "WorkerGetFiveParamsServlet", //url
+				success: function(result){
+					var jo =eval(result);
+					document.getElementById('tasknum').value=jo[0].all;
+	      var dom = document.getElementById("container");
+	      var myChart = echarts.init(dom);
+	      var app = {};
+	      option = null;
+	      var source1=new Array();
+		  //生成二维数组
+		  source1[0]=new Object();
+		  source1[1]=new Object();
+		  source1[2]=new Object();
+		  source1[3]=new Object();
+			//向数组中添加 “任务总人数”“任务成功人数”“任务失败人数”“正在审核的人数”
+		  source1[0].value=jo[0].doing;
+		  source1[1].value=jo[0].fail;
+		  source1[2].value=jo[0].success;
+		  source1[3].value=jo[0].checking;
+		  //第二个是名字
+		  source1[0].name='正在标注';
+		  source1[1].name='审核失败';
+		  source1[2].name='审核成功';
+		  source1[3].name='正在审核';
+	      option = {
+	          title : {
+	              x:'center'
+	          },
+	          tooltip : {
+	              trigger: 'item',
+	              formatter: "{a} <br/>{b} : {c} ({d}%)"
+	          },
+	          legend: {
+	              x : 'center',
+	              y : 'bottom',
+	              data:['正在标注','审核失败','审核成功','正在审核']
+	          },
+	          toolbox: {
+	              show : true,
+	              feature : {
+	                  mark : {show: true},
+	                  dataView : {show: true, readOnly: false},
+	                  magicType : {
+	                      show: true,
+	                      type: ['pie', 'funnel']
+	                  },
+	                  restore : {show: true},
+	                  saveAsImage : {show: true}
+	              }
+	          },
+	          calculable : true,
+	          series : [
+	              {
+	                  type:'pie',
+	                  radius : [30, 110],
+	                  center : ['30%', '50%'],
+	                  roseType : 'area',
+	                  data:source1
+	              }
+	          ]
+	      };
+	      ;
+	      if (option && typeof option === "object") {
+	          myChart.setOption(option, true);
+	      }
+				}
+				});*/
+	</script>
+
+
+</body>
+</html>

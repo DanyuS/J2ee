@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>会员注册码</title>
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- Set render engine for 360 browser -->
+<meta name="renderer" content="webkit">
+
+<!-- No Baidu Siteapp-->
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="apple-touch-icon-precomposed"
+	href="assets/i/app-icon72x72@2x.png">
+
+<!-- Tile icon for Win8 (144x144 + tile color) -->
+<meta name="msapplication-TileImage"
+	content="assets/i/app-icon72x72@2x.png">
+<meta name="msapplication-TileColor" content="#0e90d2">
+
+<link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
+<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<style>
+.header {
+	text-align: center;
+}
+
+.round_icon {
+	width: 34px;
+	height: 34px;
+	display: flex;
+	border-radius: 50%;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.sameline {
+	display: inline;
+}
+
+.header h1 {
+	font-size: 200%;
+	color: #333;
+	margin-top: 30px;
+}
+
+.header p {
+	font-size: 14px;
+	color: #66B3FF;
+}
+</style>
+<style>
+p1 {
+	font-family: "WebContent/assets/fonts/ZOMBIE.TTF";
+	font-size: 20px;
+}
+</style>
+<style>
+body {
+	background: url('assets/i/f12.jpg');
+	background-size: 100% 100%;
+	no-repeat
+	top
+	center
+}
+</style>
+</head>
+<script>
+function  showView(){
+	getInfo();
+}
+function getInfo(){
+	var thisURL=decodeURI(window.location.href);
+	var code =thisURL.split('~')[1];
+	var cod = document.getElementById("cod");
+	cod.innerHTML +="<button type='submit'"
+					+"class='am-btn am-btn-primary am-btn-block am-btn-lg am-radius am-animation-slide-bottom log-animation-delay'"
+					+"onclick='sub()'>"+code+"</button>";
+
+  }
+</script>
+<body onload="showView()" style="height: 100%; margin: 0">
+	<header class="am-topbar">
+		<h1 class="am-topbar-brand">会员注册码</h1>
+	</header>
+	<div class="header">
+		<p1>
+		<h1>Yummy</h1>
+		</p1>
+		<p>
+			<br />
+		</p>
+		<hr />
+	</div>
+	<div class="am-g">
+		<div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+			<form id="form1" onsubmit="return false" action="##" method="post"
+				class="am-form">
+
+
+				<br> <br> <br> <br>
+				<ul id="cod"></ul>
+				<p>请记住你的注册码</p>
+			</form>
+
+			<hr>
+		</div>
+	</div>
+	<script>
+	function sub(){
+		var url=encodeURI("Login.html");
+		window.location.href=url;
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="entity.Cart" table="cart">
+		<meta attribute="class-description">
+			This class contains the cart detail.
+		</meta>
+		<id name="cartId" type="java.lang.Integer" column="cartId">
+			<generator class="native"/>
+		</id>
+		<property name="mid" column="mid" type="java.lang.Integer"/>
+		<property name="rid" column="rid" type="java.lang.String"/>
+		<property name="meid" column="meid" type="java.lang.Integer"/>
+		<property name="name" column="name" type="java.lang.String"/>
+		<property name="currentPrice" column="currentPrice" type="java.lang.Double"/>
+		<property name="stock" column="stock" type="java.lang.Integer"/>
+		<property name="num" column="num" type="java.lang.Integer"/>
+		<property name="totalPrice" column="totalPrice" type="java.lang.Double"/>
+		<!-- <property name="actualPrice" column="actualPrice" type="java.lang.Double"/>
+		<property name="state" column="state" type="java.lang.Integer"/> -->
+	</class>
+</hibernate-mapping>
