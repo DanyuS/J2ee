@@ -60,7 +60,7 @@ public class MapUtil {
      * @return
      */
     public static String getRegeoUrl(String location) {
-        return "http://restapi.amap.com/v3/geocode/regeo?location=" + location + "&key=" + "1bbf8e9ea91d481c9c9cffd2d36b3a8d";
+        return "http://restapi.amap.com/v3/geocode/regeo?location=" + location + "&key=" + "xxxxxxxxxxxx";
     }
     
     /**
