@@ -58,7 +58,7 @@ public class MailUtil {
         // 设置发件人邮箱地址
         message.setFrom(new InternetAddress("1079933502@qq.com"));
         // 设置收件人邮箱地址 
-        message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("1079933502@qq.com")});
+        message.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("xxxxxxx@qq.com")});
         //message.setRecipient(Message.RecipientType.TO, new InternetAddress("xxx@qq.com"));//一个收件人
         // 设置邮件标题
         message.setSubject("Yummy注册激活码");
@@ -67,7 +67,7 @@ public class MailUtil {
         // 得到邮差对象
         Transport transport = session.getTransport();
         // 连接自己的邮箱账户
-        transport.connect("1079933502@qq.com", "gljabqdgpwanghed");// 密码为QQ邮箱开通的stmp服务后得到的客户端授权码
+        transport.connect("xxxxxxx@qq.com", "xxxxxxxx");// 密码为QQ邮箱开通的stmp服务后得到的客户端授权码
         // 发送邮件
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
@@ -90,7 +90,7 @@ public class MailUtil {
 		// 2.创建邮件对象 javax.mail.Message
 		// 3.发送一封激活邮件
 
-		String from = "1079933502@qq.com";// 发件人电子邮箱
+		String from = "xxxxxxxxxx@qq.com";// 发件人电子邮箱
 		String host = "smtp.qq.com"; // 指定发送邮件的主机smtp.qq.com(QQ)|smtp.163.com(网易)
 		Properties properties = System.getProperties();// 获取系统属性
 		properties.setProperty("mail.smtp.host", host);// 设置邮件服务器
@@ -106,7 +106,7 @@ public class MailUtil {
 			// 1.获取默认session对象（创建连接对象，连接到邮箱服务器）
 			Session session = Session.getDefaultInstance(properties, new Authenticator() {
 				public PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("1079933502@qq.com", "DanyuSqq214920"); // 发件人邮箱账号、密码
+					return new PasswordAuthentication("xxxxxxxxxx@qq.com", "xxxxxxxxxxx"); // 发件人邮箱账号、密码
 				}
 			});
 
